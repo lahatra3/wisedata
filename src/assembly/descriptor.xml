@@ -1,0 +1,15 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+            <scope>runtime</scope>
+            <excludes>
+                <exclude>org/projectlombok/lombok</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+</assembly>
