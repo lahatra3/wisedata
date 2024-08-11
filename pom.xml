@@ -55,13 +55,12 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
                             <mainClass>mg.lahatra3.Wisedata</mainClass>
                         </manifest>
                     </archive>
-                    <descriptors>
-                        <descriptor>src/assembly/descriptor.xml</descriptor>
-                    </descriptors>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
                 <executions>
                     <execution>

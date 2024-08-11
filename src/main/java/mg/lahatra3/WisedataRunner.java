@@ -7,12 +7,14 @@ import org.apache.spark.sql.SparkSession;
 import mg.lahatra3.beans.JdbcDataSinkConfiguration;
 import mg.lahatra3.beans.JdbcDataSourceConfiguration;
 import mg.lahatra3.beans.SparkConfiguration;
+import mg.lahatra3.beans.WisedataConfiguration;
 import mg.lahatra3.readers.JdbcDataReader;
 import mg.lahatra3.writers.JdbcDataWriter;
 
-public class WisedataService {
+public class WisedataRunner implements Runnable {
 
-    public static void run() {
+    @Override
+    public void run() {
 
         WisedataConfiguration wisedataConfiguration = new WisedataConfiguration();
         SparkConfiguration sparkConfiguration = wisedataConfiguration.getSparkConfiguration();
@@ -24,7 +26,6 @@ public class WisedataService {
             .master(sparkConfiguration.getMasterUrl())
             .getOrCreate();
 
-        
         JdbcDataReader jdbcDataReader = new JdbcDataReader(sparkSession, dataSourceConfiguration);
         Dataset<Row> dataset = jdbcDataReader.get();
 
