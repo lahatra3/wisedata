@@ -25,6 +25,7 @@ public class WisedataRunner implements Runnable {
             .appName(sparkConfiguration.getAppName())
             .master(sparkConfiguration.getMasterUrl())
             .config("spark.driver.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
+            .config("spark.executor.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
             .getOrCreate();
 
         long timeStart = System.currentTimeMillis();
