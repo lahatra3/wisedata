@@ -1,5 +1,6 @@
 package mg.lahatra3;
 
+import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -21,17 +22,29 @@ public class WisedataRunner implements Runnable {
         JdbcDataSourceConfiguration dataSourceConfiguration = wisedataConfiguration.getJdbcDataSourceConfiguration();
         JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
 
+        SparkConf sparkConf = new SparkConf()
+            .setAppName(sparkConfiguration.getAppName())
+            .setMaster(sparkConfiguration.getMasterUrl());
         SparkSession sparkSession = SparkSession.builder()
-            .appName(sparkConfiguration.getAppName())
-            .master(sparkConfiguration.getMasterUrl())
+            .config(sparkConf)
             .getOrCreate();
 
+        long timeStart = System.currentTimeMillis();
+
+        System.out.println("Starting to read data...");
         JdbcDataReader jdbcDataReader = new JdbcDataReader(sparkSession, dataSourceConfiguration);
         Dataset<Row> dataset = jdbcDataReader.get();
 
+        System.out.println("Starting to write data...");
         JdbcDataWriter jdbcDataWriter = new JdbcDataWriter(dataSinkConfiguration);
         jdbcDataWriter.accept(dataset);
 
-        sparkSession.stop();
+        long timeEnd = System.currentTimeMillis();
+
+        long duration = timeEnd - timeStart;
+
+        // sparkSession.stop();
+        System.out.println("Successfully completed...");
+        System.out.println("Duration: " + duration + "ms...");
     }
 }

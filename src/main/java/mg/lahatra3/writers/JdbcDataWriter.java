@@ -23,6 +23,7 @@ public class JdbcDataWriter implements Consumer<Dataset<Row>> {
             .option("dbtable", jdbcDataSinkConfiguration.getDbtable())
             .option("numPartitions", jdbcDataSinkConfiguration.getNumPartitions())
             .option("batchsize", jdbcDataSinkConfiguration.getBatchSize())
+            .mode("append")
             .save();
     }
 }

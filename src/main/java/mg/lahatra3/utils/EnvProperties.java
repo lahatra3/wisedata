@@ -17,7 +17,7 @@ public class EnvProperties {
         try (Stream<String> fileContentStream = Files.lines(filenamePath)) {
             fileContentStream
                 .parallel()
-                .filter(line -> !line.startsWith("#"))
+                .filter(line -> !line.startsWith("#") && !line.trim().isBlank())
                 .map(line -> line.split("=", 2))
                 .forEach(parts -> setProperties(parts[0], parts[1]));
         } catch (IOException e) {
