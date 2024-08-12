@@ -1,6 +1,5 @@
 package mg.lahatra3;
 
-import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -20,13 +19,12 @@ public class WisedataRunner implements Runnable {
         WisedataConfiguration wisedataConfiguration = new WisedataConfiguration();
         SparkConfiguration sparkConfiguration = wisedataConfiguration.getSparkConfiguration();
         JdbcDataSourceConfiguration dataSourceConfiguration = wisedataConfiguration.getJdbcDataSourceConfiguration();
-        JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
+        // JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
 
-        SparkConf sparkConf = new SparkConf()
-            .setAppName(sparkConfiguration.getAppName())
-            .setMaster(sparkConfiguration.getMasterUrl());
         SparkSession sparkSession = SparkSession.builder()
-            .config(sparkConf)
+            .appName(sparkConfiguration.getAppName())
+            .master(sparkConfiguration.getMasterUrl())
+            .config("spark.driver.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
             .getOrCreate();
 
         long timeStart = System.currentTimeMillis();
@@ -35,15 +33,18 @@ public class WisedataRunner implements Runnable {
         JdbcDataReader jdbcDataReader = new JdbcDataReader(sparkSession, dataSourceConfiguration);
         Dataset<Row> dataset = jdbcDataReader.get();
 
-        System.out.println("Starting to write data...");
-        JdbcDataWriter jdbcDataWriter = new JdbcDataWriter(dataSinkConfiguration);
-        jdbcDataWriter.accept(dataset);
+        // System.out.println("Starting to write data...");
+        // JdbcDataWriter jdbcDataWriter = new JdbcDataWriter(dataSinkConfiguration);
+        // jdbcDataWriter.accept(dataset);
+
+        dataset.printSchema();
+        dataset.show(31);
 
         long timeEnd = System.currentTimeMillis();
-
         long duration = timeEnd - timeStart;
 
-        // sparkSession.stop();
+        sparkSession.stop();
+
         System.out.println("Successfully completed...");
         System.out.println("Duration: " + duration + "ms...");
     }
