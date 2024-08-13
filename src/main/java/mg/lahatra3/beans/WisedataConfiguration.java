@@ -13,10 +13,9 @@ public class WisedataConfiguration {
 
     public WisedataConfiguration() {
         setSparkConfiguration();
-        setDataSourceConfiguration();   
+        setDataSourceConfiguration();
         setDataSinkConfiguration();
     }
-
 
     private void setDataSourceConfiguration() {
         String jdbcUrl = getRequiredConfigurationValue("DATA_SOURCE_URL");
@@ -29,18 +28,20 @@ public class WisedataConfiguration {
         String lowerBound = getConfigurationValue("DATA_SOURCE_LOWER_BOUND", "1");
         String upperBound = getConfigurationValue("DATA_SOURCE_UPPER_BOUND", "1000");
 
-        this.jdbcDataSourceConfiguration = new JdbcDataSourceConfiguration(jdbcUrl, user, passsword, dbtable, numPartitions, fetchSize, partitionColumn, lowerBound, upperBound);
+        this.jdbcDataSourceConfiguration = new JdbcDataSourceConfiguration(jdbcUrl, user, passsword, dbtable,
+            numPartitions, fetchSize, partitionColumn, lowerBound, upperBound);
     }
 
     private void setDataSinkConfiguration() {
-       String jdbcurl = getRequiredConfigurationValue("DATA_SINK_URL");
-       String user = getRequiredConfigurationValue("DATA_SINK_USER");
-       String password = getRequiredConfigurationValue("DATA_SINK_PASSWORD");
-       String dbtable = getRequiredConfigurationValue("DATA_SINK_TABLE");
-       String numPartitions = getConfigurationValue("DATA_SINK_NUM_PARTITIONS", "3");
-       String batchSize = getConfigurationValue("DATA_SINK_BATCH_SIZE", "1000");
+        String jdbcurl = getRequiredConfigurationValue("DATA_SINK_URL");
+        String user = getRequiredConfigurationValue("DATA_SINK_USER");
+        String password = getRequiredConfigurationValue("DATA_SINK_PASSWORD");
+        String dbtable = getRequiredConfigurationValue("DATA_SINK_TABLE");
+        String numPartitions = getConfigurationValue("DATA_SINK_NUM_PARTITIONS", "3");
+        String batchSize = getConfigurationValue("DATA_SINK_BATCH_SIZE", "1000");
 
-        this.jdbcDataSinkConfiguration = new JdbcDataSinkConfiguration(jdbcurl, user, password, dbtable, numPartitions, batchSize);
+        this.jdbcDataSinkConfiguration = new JdbcDataSinkConfiguration(jdbcurl, user, password, dbtable, numPartitions,
+            batchSize);
     }
 
     private void setSparkConfiguration() {

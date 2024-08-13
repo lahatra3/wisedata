@@ -15,11 +15,10 @@ public class WisedataRunner implements Runnable {
 
     @Override
     public void run() {
-
         WisedataConfiguration wisedataConfiguration = new WisedataConfiguration();
         SparkConfiguration sparkConfiguration = wisedataConfiguration.getSparkConfiguration();
         JdbcDataSourceConfiguration dataSourceConfiguration = wisedataConfiguration.getJdbcDataSourceConfiguration();
-        // JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
+        JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
 
         SparkSession sparkSession = SparkSession.builder()
             .appName(sparkConfiguration.getAppName())
@@ -34,12 +33,9 @@ public class WisedataRunner implements Runnable {
         JdbcDataReader jdbcDataReader = new JdbcDataReader(sparkSession, dataSourceConfiguration);
         Dataset<Row> dataset = jdbcDataReader.get();
 
-        // System.out.println("Starting to write data...");
-        // JdbcDataWriter jdbcDataWriter = new JdbcDataWriter(dataSinkConfiguration);
-        // jdbcDataWriter.accept(dataset);
-
-        dataset.printSchema();
-        dataset.show(31);
+        System.out.println("Starting to write data...");
+        JdbcDataWriter jdbcDataWriter = new JdbcDataWriter(dataSinkConfiguration);
+        jdbcDataWriter.accept(dataset);
 
         long timeEnd = System.currentTimeMillis();
         long duration = timeEnd - timeStart;
