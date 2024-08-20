@@ -50,8 +50,9 @@ public class WisedataConfiguration {
         String appName = env4j.get("SPARK_APP_NAME", DEFAULT_SPARK_APP_NAME);
         String masterUrl = env4j.get("SPARK_MASTER_URL", DEFAULT_SPARK_MASTER_URL);
         String driverMemory = env4j.get("SPARK_DRIVER_MEMORY", DEFAULT_SPARK_DRIVER_MEMORY);
+        String executorMemory = env4j.get("SPARK_EXECUTOR_MEMORY", DEFAULT_SPARK_EXECUTOR_MEMORY);
         String extraJavaOptions = env4j.get("SPARK_EXTRA_JAVA_OPTIONS", DEFAULT_SPARK_EXTRA_JAVA_OPTIONS);
 
-        this.sparkConfiguration = new SparkConfiguration(appName, masterUrl, driverMemory, extraJavaOptions);
+        this.sparkConfiguration = new SparkConfiguration(appName, masterUrl, driverMemory, executorMemory, extraJavaOptions);
     }
 }
