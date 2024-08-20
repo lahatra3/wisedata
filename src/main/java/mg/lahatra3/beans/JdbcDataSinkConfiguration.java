@@ -1,15 +1,15 @@
 package mg.lahatra3.beans;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class JdbcDataSinkConfiguration {
-    private final String jdbcurl;
-    private final String user;
-    private final String password;
-    private final String dbtable;
-    private final String numPartitions;
-    private final String batchSize;
+    private String jdbcUrl;
+    private String user;
+    private String password;
+    private String dbtable;
+    private String numPartitions;
+    private String batchSize;
 }
