@@ -10,5 +10,6 @@ import lombok.Setter;
 public class SparkConfiguration {
     private final String appName;
     private final String masterUrl;
+    private final String driverMemory;
     private final String extraJavaOptions;
 }
