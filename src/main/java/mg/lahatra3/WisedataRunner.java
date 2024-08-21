@@ -24,6 +24,7 @@ public class WisedataRunner implements Runnable {
             .appName(sparkConfiguration.getAppName())
             .master(sparkConfiguration.getMasterUrl())
             .config("spark.driver.memory", sparkConfiguration.getDriverMemory())
+            .config("spark.executor.memory", sparkConfiguration.getExecutorMemory())
             .config("spark.driver.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
             .config("spark.executor.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
             .getOrCreate();
