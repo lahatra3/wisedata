@@ -1,15 +1,14 @@
 package mg.lahatra3.beans;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SparkConfiguration {
-    private final String appName;
-    private final String masterUrl;
-    private final String driverMemory;
-    private final String extraJavaOptions;
+    private String appName;
+    private String masterUrl;
+    private String driverMemory;
+    private String executorMemory;
+    private String extraJavaOptions;
 }

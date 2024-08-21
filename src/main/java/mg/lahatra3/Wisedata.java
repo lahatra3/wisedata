@@ -6,7 +6,7 @@ public class Wisedata {
     public static void main(String[] args) {
         Env4j env4j = new Env4j();
         env4j.load();
-        
+
         WisedataRunner wisedataRunner = new WisedataRunner();
         wisedataRunner.run();
     }

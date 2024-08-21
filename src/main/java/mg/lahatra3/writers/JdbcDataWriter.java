@@ -17,7 +17,7 @@ public class JdbcDataWriter implements Consumer<Dataset<Row>> {
     public void accept(Dataset<Row> dataset) {
         dataset.write()
             .format("jdbc")
-            .option("url", jdbcDataSinkConfiguration.getJdbcurl())
+            .option("url", jdbcDataSinkConfiguration.getJdbcUrl())
             .option("user", jdbcDataSinkConfiguration.getUser())
             .option("password", jdbcDataSinkConfiguration.getPassword())
             .option("dbtable", jdbcDataSinkConfiguration.getDbtable())
