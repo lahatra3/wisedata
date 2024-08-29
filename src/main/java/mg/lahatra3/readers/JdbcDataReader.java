@@ -18,16 +18,16 @@ public class JdbcDataReader implements Supplier<Dataset<Row>> {
     @Override
     public Dataset<Row> get() {
         return sparkSession.read()
-            .format("jdbc")
-            .option("url", jdbcDataSourceConfiguration.getJdbcUrl())
-            .option("user", jdbcDataSourceConfiguration.getUser())
-            .option("password", jdbcDataSourceConfiguration.getPassword())
-            .option("dbtable", jdbcDataSourceConfiguration.getDbtable())
-            .option("partitionColumn", jdbcDataSourceConfiguration.getPartitionColumn())
-            .option("lowerBound", jdbcDataSourceConfiguration.getLowerBound())
-            .option("upperBound", jdbcDataSourceConfiguration.getUpperBound())
-            .option("numPartitions", jdbcDataSourceConfiguration.getNumPartitions())
-            .option("fetchsize", jdbcDataSourceConfiguration.getFetchSize())
-            .load();
+           .format("jdbc")
+           .option("url", jdbcDataSourceConfiguration.getJdbcUrl())
+           .option("user", jdbcDataSourceConfiguration.getUser())
+           .option("password", jdbcDataSourceConfiguration.getPassword())
+           .option("dbtable", jdbcDataSourceConfiguration.getDbtable())
+           .option("partitionColumn", jdbcDataSourceConfiguration.getPartitionColumn())
+           .option("lowerBound", jdbcDataSourceConfiguration.getLowerBound())
+           .option("upperBound", jdbcDataSourceConfiguration.getUpperBound())
+           .option("numPartitions", jdbcDataSourceConfiguration.getNumPartitions())
+           .option("fetchsize", jdbcDataSourceConfiguration.getFetchSize())
+           .load();
     }
 }

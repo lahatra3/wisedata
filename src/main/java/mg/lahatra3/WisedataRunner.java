@@ -7,7 +7,6 @@ import org.apache.spark.sql.SparkSession;
 import mg.lahatra3.beans.JdbcDataSinkConfiguration;
 import mg.lahatra3.beans.JdbcDataSourceConfiguration;
 import mg.lahatra3.beans.SparkConfiguration;
-import mg.lahatra3.beans.WisedataConfiguration;
 import mg.lahatra3.readers.JdbcDataReader;
 import mg.lahatra3.writers.JdbcDataWriter;
 
@@ -21,13 +20,13 @@ public class WisedataRunner implements Runnable {
         JdbcDataSinkConfiguration dataSinkConfiguration = wisedataConfiguration.getJdbcDataSinkConfiguration();
 
         SparkSession sparkSession = SparkSession.builder()
-            .appName(sparkConfiguration.getAppName())
-            .master(sparkConfiguration.getMasterUrl())
-            .config("spark.driver.memory", sparkConfiguration.getDriverMemory())
-            .config("spark.executor.memory", sparkConfiguration.getExecutorMemory())
-            .config("spark.driver.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
-            .config("spark.executor.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
-            .getOrCreate();
+           .appName(sparkConfiguration.getAppName())
+           .master(sparkConfiguration.getMasterUrl())
+           .config("spark.driver.memory", sparkConfiguration.getDriverMemory())
+           .config("spark.executor.memory", sparkConfiguration.getExecutorMemory())
+           .config("spark.driver.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
+           .config("spark.executor.extraJavaOptions", sparkConfiguration.getExtraJavaOptions())
+           .getOrCreate();
 
         long timeStart = System.currentTimeMillis();
 

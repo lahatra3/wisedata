@@ -1,1 +1,1 @@
-# wisedata1.0
+# wisedata

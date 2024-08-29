@@ -2,7 +2,6 @@ package mg.lahatra3.beans;
 
 import lombok.*;
 
-@Setter
 @Getter
 @AllArgsConstructor
 public class SparkConfiguration {
