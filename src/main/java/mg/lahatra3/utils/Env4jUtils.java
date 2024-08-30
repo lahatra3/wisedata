@@ -9,12 +9,15 @@ import java.util.stream.Stream;
 
 public class Env4jUtils {
 
-    public void load() {
+    public static void load() {
         load(".env");
     }
 
-    public void load(String filename) {
+    public static void load(String filename) {
         Path filenamePath = Paths.get(filename);
+        if (!Files.exists(filenamePath)) {
+            return;
+        }
         try (Stream<String> fileContentStream = Files.lines(filenamePath)) {
             fileContentStream
                .parallel()
@@ -26,19 +29,19 @@ public class Env4jUtils {
         }
     }
 
-    public String get(String key) {
+    public static String get(String key) {
         return Optional.ofNullable(System.getenv(key))
            .or(() -> Optional.ofNullable(System.getProperty(key)))
-           .orElseThrow(() -> new IllegalArgumentException("Missing required configuration: " + key));
+           .orElseThrow(() -> new IllegalArgumentException("Missing required configuration: " + key + " ..."));
     }
 
-    public String get(String key, String defaultValue) {
+    public static String get(String key, String defaultValue) {
         return Optional.ofNullable(System.getenv(key))
            .or(() -> Optional.ofNullable(System.getProperty(key)))
            .orElse(defaultValue);
     }
 
-    private void setProperties(String key, String value) {
+    private static void setProperties(String key, String value) {
         System.setProperty(key, value);
     }
 }
