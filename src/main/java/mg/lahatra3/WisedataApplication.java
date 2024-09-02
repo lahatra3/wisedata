@@ -8,4 +8,5 @@ public class WisedataApplication {
         WisedataRunner wisedataRunner = new WisedataRunner();
         wisedataRunner.run();
     }
+
 }

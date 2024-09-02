@@ -16,8 +16,7 @@ public class SelectColumnFunc implements UnaryOperator<Dataset<Row>> {
       if (columns.isEmpty()) {
          return dataset;
       }
-      String[] selectedColumns = columns.toArray(new String[0]);
-      return dataset.selectExpr(selectedColumns);
+      return dataset.selectExpr(columns.toArray(String[]::new));
    }
 
 }

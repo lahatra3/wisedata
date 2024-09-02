@@ -70,4 +70,5 @@ public class WisedataRunner implements Runnable {
        logger.info("SUCCESSFULLY COMPLETED...");
        logger.info("DURATION: {} ms...", duration);
     }
+
 }
