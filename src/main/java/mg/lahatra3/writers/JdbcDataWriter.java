@@ -25,4 +25,5 @@ public class JdbcDataWriter implements Consumer<Dataset<Row>> {
             .mode("append")
             .save();
     }
+
 }
