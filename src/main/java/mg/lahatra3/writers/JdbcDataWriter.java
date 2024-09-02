@@ -10,7 +10,6 @@ import mg.lahatra3.beans.JdbcDataSinkConfiguration;
 
 @RequiredArgsConstructor
 public class JdbcDataWriter implements Consumer<Dataset<Row>> {
-
     private final JdbcDataSinkConfiguration jdbcDataSinkConfiguration;
 
     @Override
