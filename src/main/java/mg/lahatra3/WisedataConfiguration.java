@@ -23,6 +23,8 @@ public class WisedataConfiguration {
         setSparkConfiguration();
         setDataSourceConfiguration();
         setDataSinkConfiguration();
+        setColumnsMapping();
+        setDataConversion();
     }
 
     private void setSparkConfiguration() {
@@ -51,10 +53,12 @@ public class WisedataConfiguration {
         this.dataConversion = DATA_TRANSFORMATION.get("data_conversion")
            .entrySet()
            .parallelStream()
-           .collect(Collectors.toMap(
-              Map.Entry::getKey,
-              entry -> DatatypeConfiguration.valueOf(entry.getValue())
-           ));
+           .collect(
+              Collectors.toMap(
+                  Map.Entry::getKey,
+                  entry -> DatatypeConfiguration.valueOf(entry.getValue())
+              )
+           );
     }
 
 }

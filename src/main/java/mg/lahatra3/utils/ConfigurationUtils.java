@@ -28,4 +28,5 @@ public class ConfigurationUtils {
    public static final Map<String, Map<String, String>> DATA_TRANSFORMATION = TransformationUtils.get();
 
    private ConfigurationUtils() {}
+
 }

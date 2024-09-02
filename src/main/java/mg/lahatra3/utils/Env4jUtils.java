@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Env4jUtils {
+
+    private Env4jUtils() {}
 
     public static void load() {
         load(".env");
@@ -19,13 +23,19 @@ public class Env4jUtils {
             return;
         }
         try (Stream<String> fileContentStream = Files.lines(filenamePath)) {
-            fileContentStream
+            Map<String, String> envMap = fileContentStream
                .parallel()
                .filter(line -> !line.startsWith("#") && !line.trim().isBlank())
                .map(line -> line.split("=", 2))
-               .forEach(parts -> setProperties(parts[0], parts[1]));
+               .collect(
+                  Collectors.toMap(
+                     part -> part[0],
+                     part -> part[1]
+                  )
+               );
+            setProperties(envMap);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -41,7 +51,8 @@ public class Env4jUtils {
            .orElse(defaultValue);
     }
 
-    private static void setProperties(String key, String value) {
-        System.setProperty(key, value);
+    private static void setProperties(Map<String, String> envMap) {
+        envMap.forEach(System::setProperty);
     }
+
 }

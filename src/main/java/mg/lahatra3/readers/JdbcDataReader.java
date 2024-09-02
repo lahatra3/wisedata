@@ -17,7 +17,7 @@ public class JdbcDataReader implements Supplier<Dataset<Row>> {
 
     @Override
     public Dataset<Row> get() {
-        return sparkSession.read()
+        return  sparkSession.read()
            .format("jdbc")
            .option("url", jdbcDataSourceConfiguration.getJdbcUrl())
            .option("user", jdbcDataSourceConfiguration.getUser())
