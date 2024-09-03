@@ -65,8 +65,8 @@
                         </goals>
                         <configuration>
                             <extraJvmArguments>
-                                -Xms3g
-                                -Xmx3g
+                                -Xms4g
+                                -Xmx4g
                                 -XX:+UseG1GC
                                 -XX:+IgnoreUnrecognizedVMOptions
                                 --add-opens=java.base/java.lang=ALL-UNNAMED

@@ -7,6 +7,9 @@
             "mainClass": "mg.lahatra3.Wisedata",
             "projectName": "wisedata",
             "vmArgs": [
+                "-Xms4g",
+                "-Xmx4g",
+                "-XX:+UseG1GC",
                 "--add-opens=java.base/java.lang=ALL-UNNAMED",
                 "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
                 "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",

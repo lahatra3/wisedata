@@ -19,10 +19,11 @@ public class TransformationUtils {
          if (Objects.isNull(inputStream)) {
             throw new RuntimeException("Transformation file configuration not found...");
          }
-         String tranformationConfString = new Scanner(inputStream, StandardCharsets.UTF_8)
-            .useDelimiter("\\A").next();
-         ObjectMapper objectMapper = new ObjectMapper();
-         return objectMapper.readValue(tranformationConfString, new TypeReference<>() {});
+         try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8).useDelimiter("\\A")) {
+            String tranformationConfString = scanner.next();
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(tranformationConfString, new TypeReference<>() {});
+         }
       } catch (Exception e) {
          throw new RuntimeException("Failed to read transformation.json...", e);
       }
