@@ -45,7 +45,7 @@ public class WisedataRunner implements Runnable {
 
        logger.info("STARTING TO READ DATA...");
        JdbcDataReader jdbcDataReader = new JdbcDataReader(sparkSession, dataSourceConfiguration);
-       Dataset<Row> originDataset = jdbcDataReader.get().persist(StorageLevel.DISK_ONLY_3());
+       Dataset<Row> originDataset = jdbcDataReader.get().persist(StorageLevel.MEMORY_AND_DISK());
 
        RenameColumnFunc renameColumnFunc = new RenameColumnFunc(columnsMapping);
        Dataset<Row> transformedDatasetRenameColumn = renameColumnFunc.apply(originDataset);
